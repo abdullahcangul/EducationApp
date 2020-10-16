@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Cangul.EducationApp.Entity.Interface;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
