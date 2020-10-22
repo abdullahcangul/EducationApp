@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cangul.EducationApp.DTO\Cangul.EducationApp.DTO.csproj" />
     <ProjectReference Include="..\Cangul.EducationApp.Entity\Cangul.EducationApp.Entity.csproj" />
   </ItemGroup>
 

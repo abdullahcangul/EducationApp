@@ -14,11 +14,13 @@ namespace Cangul.EducationApp.DataAccess.Concrete.EntityFramworkCore.Mapping
             builder.HasKey(I => I.Id);
             builder.Property(I => I.Id).UseIdentityColumn();
 
-            builder.HasMany(I => I.Parents).WithOne(I => I.Student).HasForeignKey(I => I.StudentId);
-            builder.HasOne(I => I.Person).WithOne(I => I.Student).HasForeignKey<Student>(p => p.PersonId);
-            builder.HasOne(I => I.Teacher).WithMany(I => I.Students).HasForeignKey(I => I.TeacherId);
-            builder.HasOne(I => I.Classroom).WithMany(I => I.Students).HasForeignKey(I => I.ClassromId);
+            builder.Property(I => I.Name).HasMaxLength(100).IsRequired();
+            builder.Property(I => I.Surname).HasMaxLength(100).IsRequired();
+            builder.Property(I => I.StudentNumber).HasMaxLength(100).IsRequired();
+            builder.Property(I => I.Tel).HasMaxLength(20).IsRequired();
+            builder.Property(I => I.ParentTel).HasMaxLength(20).IsRequired();
 
+            builder.HasMany(I => I.studentTests).WithOne(I => I.Student).HasForeignKey(I => I.StudentID);
         }
     }
 }

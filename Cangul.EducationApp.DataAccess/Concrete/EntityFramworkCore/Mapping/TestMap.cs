@@ -15,9 +15,10 @@ namespace Cangul.EducationApp.DataAccess.Concrete.EntityFramworkCore.Mapping
             builder.HasKey(I => I.Id);
             builder.Property(I => I.Id).UseIdentityColumn();
 
-            builder.HasOne(I => I.Trot).WithOne(I => I.Test).HasForeignKey<Test>(I => I.TrotId).OnDelete(DeleteBehavior.Restrict); ;
-        }
+            builder.Property(I => I.Name).HasMaxLength(100).IsRequired();
+            builder.Property(I => I.Description).HasMaxLength(500); 
+            builder.HasIndex(I => I.Name).IsUnique();
 
-   
+        }
     }
 }

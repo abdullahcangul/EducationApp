@@ -2,12 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using Cangul.EducationApp.Business.DiContainer;
+using Cangul.EducationApp.DataAccess.Concrete.EntityFramworkCore.Context;
+using Cangul.EducationApp.WebUI.CustomCollectionExtensions;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
 
 namespace Cangul.EducationApp.WebUI
 {
@@ -23,7 +29,16 @@ namespace Cangul.EducationApp.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddContainerWithDependencies();
+            services.AddDbContext<EducationContext>();
+            services.AddAutoMapper(typeof(Startup));
+
+
+            services.AddCustomValidator();
+            services.AddControllersWithViews()
+                .AddFluentValidation()
+                .AddRazorRuntimeCompilation()
+                .AddJsonOptions(options =>  options.JsonSerializerOptions.PropertyNameCaseInsensitive = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

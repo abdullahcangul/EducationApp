@@ -1,0 +1,65 @@
+﻿@model TestUpdateDto
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="col-lg-12">
+    <div class="card card-custom example example-compact">
+        <div class="card-header">
+            <h3 class="card-title">Test Update</h3>
+            <div class="card-toolbar">
+
+            </div>
+        </div>
+        <div class="card-body">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <form class="form" id="kt_form_1" method="post">
+                <div class="form-group row">
+                    <label class="col-form-label text-right col-lg-1 col-sm-12">Name *</label>
+                    <div class="col-lg-11 col-md-9 col-sm-12">
+                        <input type="text" class="form-control" asp-for="Name" name="Name" placeholder="Enter exam name" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label text-right col-lg-1 col-sm-12">Description *</label>
+                    <div class="col-lg-11 col-md-9 col-sm-12">
+                        <input type="text" class="form-control" asp-for="Description" name="Description" placeholder="Enter exam description" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-form-label col-lg-1 col-sm-12 text-right">Sınav Tarihi *</label>
+                    <div class="col-lg-4 col-md-9 col-sm-12">
+                        <div class="input-group date">
+                            <input type="text" class="form-control" asp-for="ExamDate" name="ExamDate" value="@DateTime.Now" placeholder="Select date & time" id="kt_datetimepicker" />
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="la la-calendar-check-o glyphicon-th"></i></span>
+                            </div>
+                        </div>
+                        <span class="form-text text-muted">Select a date time</span>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-primary font-weight-bold mr-2">Save</button>
+                            <a asp-action="index" class="btn btn-light-primary font-weight-bold">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+
+@section JavaScript{
+    <script src="/demo1/dist/assets/js/pages/crud/forms/validation/form-widgets.js?v=7.0.4"></script>
+    <script src="~/jquery-validate/jquery.validate.js"></script>
+    <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/TestPage/TestValidation.js"></script>
+}
+
+

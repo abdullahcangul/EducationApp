@@ -1,4 +1,5 @@
-﻿using Cangul.EducationApp.DataAccess.Interface;
+﻿using Cangul.EducationApp.Business.Interface;
+using Cangul.EducationApp.DataAccess.Interface;
 using Cangul.EducationApp.Entity.Interface;
 using System;
 using System.Collections.Generic;

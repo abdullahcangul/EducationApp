@@ -19,155 +19,6 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Answer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("OptionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("QuestionAnswer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StudentTrotId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OptionId")
-                        .IsUnique();
-
-                    b.HasIndex("StudentTrotId");
-
-                    b.ToTable("Answer");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Branch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Branch");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Classroom", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Classroom");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.DifficultyLevel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DifficultyLevel");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Exam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("ExamDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ExamDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Exam");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.ExamGroup", b =>
-                {
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.HasKey("ExamId", "GroupId");
-
-                    b.HasIndex("GroupId");
-
-                    b.ToTable("ExamGroup");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Group", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Group");
-                });
-
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Image", b =>
                 {
                     b.Property<int>("Id")
@@ -200,19 +51,22 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AnswerQuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Sequence")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -220,102 +74,6 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                     b.HasIndex("QuestionId");
 
                     b.ToTable("Option");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Parent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MyProperty")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PersonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId")
-                        .IsUnique()
-                        .HasFilter("[PersonId] IS NOT NULL");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Parent");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Person", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SurName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tel1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tel2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Person");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.PilotExam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("PilotExamDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("QuestionCount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExamId")
-                        .IsUnique();
-
-                    b.ToTable("PilotExam");
                 });
 
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Question", b =>
@@ -327,83 +85,59 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("AnswerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Anwer")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("QuestionDescription")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TopicId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AnswerId")
+                        .IsUnique();
+
+                    b.HasIndex("TopicId");
 
                     b.ToTable("Question");
                 });
 
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.QuestionSection", b =>
-                {
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SequenceNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("QuestionId", "SectionId");
-
-                    b.HasIndex("SectionId");
-
-                    b.ToTable("QuestionSection");
-                });
-
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.QuestionTest", b =>
-                {
-                    b.Property<int>("TestId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.HasKey("TestId", "QuestionId");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("QuestionTest");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Section", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PilotExamId")
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionCount")
+                    b.Property<int>("TestId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PilotExamId");
+                    b.HasIndex("QuestionId");
 
-                    b.ToTable("Section");
+                    b.HasIndex("TestId");
+
+                    b.ToTable("QuestionTest");
                 });
 
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Student", b =>
@@ -415,32 +149,37 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClassromId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("PersonId")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ParentTel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<string>("StudentNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Tel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassromId");
-
-                    b.HasIndex("PersonId")
-                        .IsUnique()
-                        .HasFilter("[PersonId] IS NOT NULL");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("student");
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.StudentAnswer", b =>
@@ -448,6 +187,8 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("AnswerId")
@@ -456,19 +197,27 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("StudentId")
+                    b.Property<int>("IsCorrect")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentTestId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TestId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AnswerId");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("StudentTestId");
+
+                    b.HasIndex("TestId");
 
                     b.ToTable("StudentAnswer");
                 });
 
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.StudentTrot", b =>
+            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.StudentTest", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -477,56 +226,19 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ExamId")
+                    b.Property<int>("StudentID")
                         .HasColumnType("int");
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("StudentId")
+                    b.Property<int>("TestID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamId");
+                    b.HasIndex("StudentID");
 
-                    b.HasIndex("GroupId");
+                    b.HasIndex("TestID");
 
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("StudentTrot");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Teacher", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BranchId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("PersonId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("PersonId")
-                        .IsUnique()
-                        .HasFilter("[PersonId] IS NOT NULL");
-
-                    b.ToTable("Teacher");
+                    b.ToTable("StudentTest");
                 });
 
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Test", b =>
@@ -538,24 +250,24 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ExamId")
-                        .HasColumnType("int");
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("ExamDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TrotId")
-                        .HasColumnType("int");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExamId")
-                        .IsUnique();
-
-                    b.HasIndex("TrotId")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Test");
@@ -579,67 +291,6 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                     b.ToTable("Topic");
                 });
 
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Trot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TestId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("TestId")
-                        .IsUnique();
-
-                    b.ToTable("Trot");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Answer", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Option", "Option")
-                        .WithOne("Answer")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Answer", "OptionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.StudentTrot", "StudentTrot")
-                        .WithMany("Answers")
-                        .HasForeignKey("StudentTrotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.ExamGroup", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Exam", "Exam")
-                        .WithMany("ExamGroups")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Group", "Group")
-                        .WithMany("ExamGroups")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Image", b =>
                 {
                     b.HasOne("Cangul.EducationApp.Entity.Concrete.Question", "Question")
@@ -654,43 +305,21 @@ namespace Cangul.EducationApp.DataAccess.Migrations
                     b.HasOne("Cangul.EducationApp.Entity.Concrete.Question", "Question")
                         .WithMany("Options")
                         .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Parent", b =>
+            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Question", b =>
                 {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Person", "Person")
-                        .WithOne("Parent")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Parent", "PersonId");
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Student", "Student")
-                        .WithMany("Parents")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.PilotExam", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Exam", "Exam")
-                        .WithOne("PilotExam")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.PilotExam", "ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.QuestionSection", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Question", "Question")
-                        .WithMany("QuestionSections")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Option", "Answer")
+                        .WithOne("AnswerQuestion")
+                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Question", "AnswerId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Section", "Section")
-                        .WithMany("QuestionSections")
-                        .HasForeignKey("SectionId")
+                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Topic", "Topic")
+                        .WithMany("Qouestions")
+                        .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -698,119 +327,46 @@ namespace Cangul.EducationApp.DataAccess.Migrations
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.QuestionTest", b =>
                 {
                     b.HasOne("Cangul.EducationApp.Entity.Concrete.Question", "Question")
-                        .WithMany("QuestionTest")
+                        .WithMany("QuestionTests")
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Cangul.EducationApp.Entity.Concrete.Test", "Test")
                         .WithMany("QuestionTest")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Section", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.PilotExam", "PilotExam")
-                        .WithMany("Sections")
-                        .HasForeignKey("PilotExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Student", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Classroom", "Classroom")
-                        .WithMany("Students")
-                        .HasForeignKey("ClassromId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Person", "Person")
-                        .WithOne("Student")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Student", "PersonId");
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Teacher", "Teacher")
-                        .WithMany("Students")
-                        .HasForeignKey("TeacherId")
+                        .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.StudentAnswer", b =>
                 {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Answer", "Answer")
-                        .WithMany("StudentAnswers")
+                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Option", "Answer")
+                        .WithMany()
                         .HasForeignKey("AnswerId");
 
+                    b.HasOne("Cangul.EducationApp.Entity.Concrete.StudentTest", "StudentTest")
+                        .WithMany("StudentAnswers")
+                        .HasForeignKey("StudentTestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Test", null)
+                        .WithMany("StudentAnswer")
+                        .HasForeignKey("TestId");
+                });
+
+            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.StudentTest", b =>
+                {
                     b.HasOne("Cangul.EducationApp.Entity.Concrete.Student", "Student")
+                        .WithMany("studentTests")
+                        .HasForeignKey("StudentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Test", "Test")
                         .WithMany()
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.StudentTrot", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Exam", "Exam")
-                        .WithMany("StudentTrots")
-                        .HasForeignKey("ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Group", "Group")
-                        .WithMany("StudentTrots")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Student", "Student")
-                        .WithMany("StudentTrots")
-                        .HasForeignKey("StudentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Teacher", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Branch", "Branch")
-                        .WithMany("Teachers")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Person", "Person")
-                        .WithOne("Teacher")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Teacher", "PersonId");
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Test", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Exam", "Exam")
-                        .WithOne("Test")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Test", "ExamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Trot", "Trot")
-                        .WithOne("Test")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Test", "TrotId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Cangul.EducationApp.Entity.Concrete.Trot", b =>
-                {
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Group", "Group")
-                        .WithMany("Trots")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cangul.EducationApp.Entity.Concrete.Section", "Section")
-                        .WithOne("Trot")
-                        .HasForeignKey("Cangul.EducationApp.Entity.Concrete.Trot", "TestId")
+                        .HasForeignKey("TestID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

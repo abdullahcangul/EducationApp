@@ -11,13 +11,10 @@ namespace Cangul.EducationApp.DataAccess.Concrete.EntityFramworkCore.Mapping
     {
         public void Configure(EntityTypeBuilder<QuestionTest> builder)
         {
-            builder.HasKey(qt => new { qt.TestId, qt.QuestionId });
-            builder.HasOne(qt => qt.Question)
-                .WithMany(q => q.QuestionTest)
-                .HasForeignKey(qt => qt.QuestionId);
-            builder.HasOne(qt => qt.Test)
-                .WithMany(t => t.QuestionTest)
-                .HasForeignKey(qt => qt.QuestionId);
+            builder.HasKey(I => I.Id);
+            builder.Property(I => I.Id).UseIdentityColumn();
+
+            builder.HasOne(I => I.Test).WithMany(I => I.QuestionTest).HasForeignKey(I => I.TestId);
         }
     }
 }

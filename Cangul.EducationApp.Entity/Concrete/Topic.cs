@@ -11,5 +11,7 @@ namespace Cangul.EducationApp.Entity.Concrete
         public string Name { get; set; }
         public bool IsActive { get; set; }
 
+        public List<Question> Qouestions { get; set; }
+
     }
 }

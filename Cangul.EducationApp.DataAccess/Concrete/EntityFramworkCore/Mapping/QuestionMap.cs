@@ -15,6 +15,9 @@ namespace Cangul.EducationApp.DataAccess.Concrete.EntityFramworkCore.Mapping
             builder.Property(I => I.Id).UseIdentityColumn();
 
             builder.HasMany(I => I.Images).WithOne(I => I.Question).HasForeignKey(I => I.QuestionId);
+            builder.HasOne(I => I.Answer).WithOne(I=>I.AnswerQuestion).HasForeignKey<Question>(I=>I.AnswerId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasMany(I => I.Options).WithOne(I => I.Question).HasForeignKey(I => I.QuestionId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(I => I.QuestionTests).WithOne(I => I.Question).HasForeignKey(I => I.QuestionId);
 
         }
     }
