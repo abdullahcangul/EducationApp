@@ -18,9 +18,13 @@ namespace Cangul.EducationApp.Business.DiContainer
 
 
             services.AddScoped<ITestService, TestManager>();
+            services.AddScoped<IQuestionService, QuestionManager>();
+            services.AddScoped<ITopicService, TopicManager>();
 
 
             services.AddScoped<ITestDal, EfTestRepository>();
+            services.AddScoped<IQuestionDal, EfQuestionRepository>();
+            services.AddScoped<ITopicDal, EfTopicRepository>();
 
         }
     }

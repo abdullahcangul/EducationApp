@@ -13,10 +13,10 @@ namespace Cangul.EducationApp.Entity.Concrete
         public string Description { get; set; }
         public string Anwer { get; set; }
 
-        public int AnswerId { get; set; }
+        public int? AnswerId { get; set; }
         public Option Answer { get; set; }
 
-        public int TopicId { get; set; }
+        public int? TopicId { get; set; }
         public Topic Topic { get; set; }
 
 

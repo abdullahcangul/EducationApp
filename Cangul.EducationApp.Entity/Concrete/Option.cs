@@ -11,7 +11,7 @@ namespace Cangul.EducationApp.Entity.Concrete
         public string Content { get; set; }
         public string Description { get; set; }
 
-        public int AnswerQuestionId { get; set; }
+        public int? AnswerQuestionId { get; set; }
         public Question AnswerQuestion { get; set; }
 
         public int QuestionId { get; set; }

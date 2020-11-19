@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cangul.EducationApp.Entity\Cangul.EducationApp.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

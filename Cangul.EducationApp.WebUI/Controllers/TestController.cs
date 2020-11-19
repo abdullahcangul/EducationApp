@@ -8,12 +8,14 @@ using Cangul.EducationApp.Business.Interface;
 using Cangul.EducationApp.DTO.Test;
 using Cangul.EducationApp.Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Cangul.EducationApp.WebUI.Controllers
 {
     public class TestController : Controller
     {
         private readonly ITestService _testService;
+        
         private readonly  IMapper _mapper;
 
         public TestController(ITestService testService,IMapper mapper)
@@ -35,7 +37,13 @@ namespace Cangul.EducationApp.WebUI.Controllers
        
         public async Task<IActionResult> Create()
         {
+            
             return  View(new TestAddDto());
+        }
+        public async Task<IActionResult> Create2()
+        {
+
+            return View(new TestAddDto());
         }
 
         [HttpPost]
